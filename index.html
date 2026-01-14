@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Mingle | Curated Women's Fashion</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Custom Font Settings */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fcfcfc;
+        }
+        
+        h1, h2, h3, h4, .brand-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Custom Scrollbar for Filters */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Smooth Fade In Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .product-card {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        /* Image Hover Zoom */
+        .img-container {
+            overflow: hidden;
+        }
+        .img-container img {
+            transition: transform 0.5s ease;
+        }
+        .product-card:hover .img-container img {
+            transform: scale(1.05);
+        }
+    </style>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#1a1a1a',
+                            pink: '#FCE7F3', // pink-100
+                            rose: '#BE185D', // pink-700
+                            gold: '#D4AF37'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="text-gray-800 flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="filterProducts('all')">
+                    <i class="fa-solid fa-vest-patches text-brand-rose text-2xl"></i>
+                    <span class="brand-font text-2xl font-bold tracking-tight text-gray-900">Style Mingle</span>
+                </div>
+                
+                <!-- Social / External Links -->
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-brand-rose transition-colors">
+                        <i class="fa-brands fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-brand-rose transition-colors">
+                        <i class="fa-brands fa-pinterest text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-gradient-to-r from-pink-50 to-white py-12 px-4 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Curated Style for Her</h1>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-6">Discover the latest trends in women's fashion. Hand-picked favorites from Amazon, just for you.</p>
+    </header>
+
+    <!-- Filter Section (Hashtags) -->
+    <div class="bg-white border-b border-gray-100 sticky top-16 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-3">
+            <div class="flex gap-3 overflow-x-auto hide-scrollbar" id="filter-container">
+                <!-- Filters injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        <!-- Grid View: 2 Columns on Mobile (grid-cols-2), increasing on larger screens -->
+        <div id="product-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
+            <!-- Products injected via JS -->
+        </div>
+        
+        <div id="no-results" class="hidden text-center py-20">
+            <p class="text-gray-500 text-lg">No items found in this category.</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-12 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 brand-font">Style Mingle</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Your daily dose of fashion inspiration. We curate the best women's apparel so you don't have to search for hours.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Newsletter</h3>
+                    <p class="text-gray-400 text-sm mb-2">Get the latest trends directly to your inbox.</p>
+                    <div class="flex gap-2">
+                        <input type="email" placeholder="Your email" class="bg-gray-800 border-none text-white text-sm rounded px-3 py-2 w-full focus:ring-1 focus:ring-brand-rose">
+                        <button class="bg-brand-rose hover:bg-pink-700 text-white px-4 py-2 rounded text-sm font-medium transition">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-xs text-gray-500 mb-2">
+                    Disclaimer: Style Mingle is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate, we earn from qualifying purchases at no extra cost to you.
+                </p>
+                <p class="text-sm text-gray-400">&copy; 2023 Style Mingle. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- Data Configuration ---
+        const categories = [
+            { id: 'all', label: 'All' },
+            { id: 'dresses', label: '#Dresses' },
+            { id: 'tops', label: '#Tops' },
+            { id: 'bottoms', label: '#Bottoms' },
+            { id: 'outerwear', label: '#Outerwear' },
+            { id: 'activewear', label: '#Activewear' },
+            { id: 'accessories', label: '#Accessories' },
+        ];
+
+        // Mock Product Data (Images from Unsplash source for demonstration)
+        const products = [
+            {
+                id: 1,
+                title: "Floral Maxi Summer Dress",
+                price: 29.99,
+                category: "dresses",
+                image: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Lightweight, breathable floral dress perfect for beach days or casual outings.",
+                link: "#amazon-link"
+            },
+            {
+                id: 2,
+                title: "Classic White Silk Blouse",
+                price: 45.50,
+                category: "tops",
+                image: "https://images.unsplash.com/photo-1598532163257-5260845e2b25?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Elegant silk blouse suitable for office wear or evening dinners.",
+                link: "#amazon-link"
+            },
+            {
+                id: 3,
+                title: "High-Waist Denim Jeans",
+                price: 39.99,
+                category: "bottoms",
+                image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Vintage wash denim with a comfortable high-waist fit.",
+                link: "#amazon-link"
+            },
+            {
+                id: 4,
+                title: "Beige Trench Coat",
+                price: 89.00,
+                category: "outerwear",
+                image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Timeless trench coat to keep you stylish during transition seasons.",
+                link: "#amazon-link"
+            },
+            {
+                id: 5,
+                title: "Yoga Active Set",
+                price: 32.99,
+                category: "activewear",
+                image: "https://images.unsplash.com/photo-1518310383802-640c2de311b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Stretchable and moisture-wicking fabric for intense workouts.",
+                link: "#amazon-link"
+            },
+            {
+                id: 6,
+                title: "Gold Plated Hoop Earrings",
+                price: 14.95,
+                category: "accessories",
+                image: "https://images.unsplash.com/photo-1635767798638-3e2523456c98?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Minimalist gold hoops that go with every outfit.",
+                link: "#amazon-link"
+            },
+            {
+                id: 7,
+                title: "Little Black Cocktail Dress",
+                price: 55.00,
+                category: "dresses",
+                image: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "The essential LBD. Flattering cut and premium fabric.",
+                link: "#amazon-link"
+            },
+            {
+                id: 8,
+                title: "Chunky Knit Sweater",
+                price: 42.00,
+                category: "tops",
+                image: "https://images.unsplash.com/photo-1624835656360-a84379e4d50c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Cozy oversized knit sweater for chilly autumn evenings.",
+                link: "#amazon-link"
+            }
+        ];
+
+        // --- Logic ---
+        
+        let activeCategory = 'all';
+
+        // 1. Render Categories (Hashtags)
+        function renderFilters() {
+            const container = document.getElementById('filter-container');
+            container.innerHTML = categories.map(cat => `
+                <button 
+                    onclick="filterProducts('${cat.id}')"
+                    class="whitespace-nowrap px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 border ${
+                        activeCategory === cat.id 
+                        ? 'bg-gray-900 text-white border-gray-900 shadow-md' 
+                        : 'bg-white text-gray-600 border-gray-200 hover:border-gray-400 hover:text-gray-900'
+                    }">
+                    ${cat.label}
+                </button>
+            `).join('');
+        }
+
+        // 2. Render Products
+        function renderProducts(category) {
+            activeCategory = category;
+            renderFilters(); // Re-render filters to update active state
+
+            const grid = document.getElementById('product-grid');
+            const noResults = document.getElementById('no-results');
+            
+            // Filter Data
+            const filteredProducts = category === 'all' 
+                ? products 
+                : products.filter(p => p.category === category);
+
+            // Handle No Results
+            if (filteredProducts.length === 0) {
+                grid.innerHTML = '';
+                noResults.classList.remove('hidden');
+                return;
+            } else {
+                noResults.classList.add('hidden');
+            }
+
+            // Generate HTML
+            grid.innerHTML = filteredProducts.map(product => `
+                <div class="product-card group bg-white rounded-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col h-full">
+                    
+                    <!-- Image Area -->
+                    <div class="img-container relative aspect-[3/4] bg-gray-100">
+                        <img 
+                            src="${product.image}" 
+                            alt="${product.title}" 
+                            class="w-full h-full object-cover"
+                            loading="lazy"
+                        >
+                        <!-- Quick View / Heart Icon Overlay (Cosmetic) -->
+                        <button class="absolute top-3 right-3 bg-white/80 backdrop-blur rounded-full p-2 text-gray-500 hover:text-red-500 transition shadow-sm">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                    </div>
+
+                    <!-- Content Area -->
+                    <div class="p-4 flex flex-col flex-grow">
+                        <div class="flex-grow">
+                            <span class="text-xs text-brand-rose font-semibold uppercase tracking-wide">#${product.category}</span>
+                            <h3 class="font-serif text-lg font-medium text-gray-900 leading-tight mt-1 mb-2 line-clamp-2">${product.title}</h3>
+                            <p class="text-sm text-gray-500 line-clamp-2 mb-3">${product.description}</p>
+                        </div>
+                        
+                        <!-- Price & Action -->
+                        <div class="pt-3 border-t border-gray-50 flex items-center justify-between mt-auto">
+                            <span class="text-lg font-bold text-gray-900">$${product.price.toFixed(2)}</span>
+                            <a href="${product.link}" target="_blank" class="bg-gray-900 hover:bg-brand-rose text-white text-xs font-semibold py-2 px-4 rounded transition-colors duration-300 flex items-center gap-2">
+                                Buy Now <i class="fa-brands fa-amazon"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts('all');
+        });
+
+    </script>
+</body>
+</html>
